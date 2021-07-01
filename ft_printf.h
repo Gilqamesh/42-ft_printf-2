@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 14:18:21 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 14:34:18 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 15:46:10 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-int	ft_printf(const char *, ...);
+int		ft_printf(const char *, ...);
+char	*malloc_conv_spec(char *format, int *format_index);
+int		set_flags(char *conv_spec, int *flags, va_list ap);
+int		handle_conversion_spec(char *conv_spec, va_list ap);
+int		is_valid_conv_spec(char *conv_spec);
 
 #endif
