@@ -6,14 +6,14 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 14:20:43 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 11:47:10 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 14:23:30 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft/libft.h"
 #include <stdio.h>
 #include <limits.h>
 
