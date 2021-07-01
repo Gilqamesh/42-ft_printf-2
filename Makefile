@@ -6,7 +6,7 @@
 #    By: edavid <edavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/25 20:47:25 by edavid            #+#    #+#              #
-#    Updated: 2021/07/01 19:52:41 by edavid           ###   ########.fr        #
+#    Updated: 2021/07/01 20:40:16 by edavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ libftHeader = ./libft/libft.h
 sources = ft_printf.c ft_conversions.c ft_conversions2.c \
 ft_conversions_utils.c ft_conversions_utils2.c ft_printf_utils.c \
 ft_set_flags.c ft_print_conversion_hexa.c ft_print_conversion_hexa_utilities.c \
-ft_print_conversion_s_utilities.c ft_print_conversion_s.c
+ft_print_conversion_s_utilities.c ft_print_conversion_s.c ft_print_conversion_p.c
 
 $(NAME) : $(sources:.c=.o)
 	cd libft && $(MAKE) all
@@ -46,6 +46,8 @@ ft_print_conversion_s.o : ft_print_conversion_s.c $(libftHeader) ft_conversions.
 	$(CC) $(CFLAGS) -c ft_print_conversion_s.c
 ft_print_conversion_s_utilities.o : ft_print_conversion_s_utilities.c $(libftHeader) ft_print_conversion_s_utilities.h
 	$(CC) $(CFLAGS) -c ft_print_conversion_s_utilities.c
+ft_print_conversion_p.o : ft_print_conversion_p.c $(libftHeader) ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_print_conversion_p.c
 driver.o : driver.c ft_printf.h
 	$(CC) $(CFLAGS) -c driver.c
 .PHONY: all clean fclean re bonus test

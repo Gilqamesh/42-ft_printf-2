@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:31:19 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 19:30:28 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 20:33:23 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,35 @@
 #include "ft_conversions.h"
 #include "libft/libft.h"
 
+static void	positive_width(int *printed_bytes, int *flags, unsigned char c)
+{
+	*printed_bytes = flags[2] + 1;
+	if (flags[0])
+	{
+		write(1, &c, 1);
+		while (flags[2]--)
+			ft_putchar_fd(' ', 1);	
+	}
+	else
+	{
+		while (flags[2]--)
+			ft_putchar_fd(' ', 1);	
+		write(1, &c, 1);
+	}
+}
+
 int	print_conversion_c(unsigned char c, int *flags)
 {
 	int	printed_bytes;
 
-	if (--flags[2] > 0) // pad with spaces
-	{
-		printed_bytes = flags[2] + 1;
-		if (flags[0]) // left justified
-		{
-			write(1, &c, 1);
-			while (flags[2]--)
-				ft_putchar_fd(' ', 1);	
-		}
-		else // right justified
-		{
-			while (flags[2]--)
-				ft_putchar_fd(' ', 1);	
-			write(1, &c, 1);
-		}
-	}
+	if (--flags[2] > 0)
+		positive_width(&printed_bytes, flags, c);
 	else
 	{
 		printed_bytes = 1;
 		write(1, &c, 1);
 	}
 	return (printed_bytes);
-}
-
-int	print_conversion_p(void *arg_pointer, int *flags)
-{
-	int addr_len;
-	int	printed_spaces;
-	int	null_precision_pointer;
-
-	null_precision_pointer = 0;
-	if (!arg_pointer && flags[3] == -2)
-		null_precision_pointer = 1;
-	printed_spaces = 0;
-	addr_len = digits_in_hexa((unsigned long)arg_pointer);
-	if (flags[0])
-	{
-		write(1, "0x", 2);
-		if (!null_precision_pointer)
-			print_ultoh((unsigned long)arg_pointer, 's');
-		if (flags[2] > addr_len + 2 - null_precision_pointer)
-			while (flags[2]-- > addr_len + 2 - null_precision_pointer)
-			{
-				ft_putchar_fd(' ', 1);
-				printed_spaces++;
-			}
-	}
-	else
-	{
-		if (flags[2] > addr_len + 2 - null_precision_pointer)
-			while (flags[2]-- > addr_len + 2 - null_precision_pointer)
-			{
-				ft_putchar_fd(' ', 1);
-				printed_spaces++;
-			}
-		write(1, "0x", 2);
-		if (!null_precision_pointer)
-			print_ultoh((unsigned long)arg_pointer, 's');
-	}
-	return (addr_len + printed_spaces + 2);
 }
 
 int	print_conversion_int(int n, int *flags)
