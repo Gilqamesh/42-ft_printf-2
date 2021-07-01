@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:33:04 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 17:06:19 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 19:21:13 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void	handle_left_justified(int *flags)
 	{
 		while (flags[2]-- - 1)
 			ft_putchar_fd('0', 1);
-	ft_putchar_fd('%', 1);
+		ft_putchar_fd('%', 1);
 	}
 	else
 	{
-	ft_putchar_fd('%', 1);
+		ft_putchar_fd('%', 1);
 		while (flags[2]-- - 1)
 			ft_putchar_fd(' ', 1);
 	}
@@ -45,7 +45,7 @@ static void	handle_right_justified(int *flags, int *printed_bytes)
 	ft_putchar_fd('%', 1);
 }
 
-int	print_conversion_perc(int *flags) // looks good
+int	print_conversion_perc(int *flags)
 {
 	int		printed_bytes;
 
@@ -65,7 +65,7 @@ int	print_conversion_perc(int *flags) // looks good
 	return (printed_bytes);
 }
 
-int	print_conversion(char conversion, va_list ap, int *flags) // looks good
+int	print_conversion(char conversion, va_list ap, int *flags)
 {
 	if (conversion == 'c')
 		return (print_conversion_c((unsigned char)va_arg(ap, int), flags));
@@ -78,7 +78,8 @@ int	print_conversion(char conversion, va_list ap, int *flags) // looks good
 	else if (conversion == 'u')
 		return (print_conversion_uint((unsigned int)va_arg(ap, int), flags));
 	else if (conversion == 'x' || conversion == 'X')
-		return (print_conversion_hexa((unsigned int)va_arg(ap, int), flags, conversion));
+		return (print_conversion_hexa((unsigned int)va_arg(ap, int), flags,
+				conversion));
 	else if (conversion == '%')
 		return (print_conversion_perc(flags));
 	else
