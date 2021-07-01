@@ -6,14 +6,14 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:43:21 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 14:44:48 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 19:28:41 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_conversions.h"
 #include <stdlib.h>
 
-int		ft_uintlen(unsigned int n)
+int	ft_uintlen(unsigned int n)
 {
 	int	len;
 
