@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:34:46 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 14:45:44 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 19:22:51 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_ultoh(unsigned long n, char check_casing)
 		write(1, &(char){ft_toupper(hexa[n % 16])}, 1);
 }
 
-int		digits_in_hexa(unsigned long n)
+int	digits_in_hexa(unsigned long n)
 {
 	int	digits;
 
@@ -70,8 +70,8 @@ void	shift_str(char **str)
 
 char	*ft_utox(unsigned int n, char check_casing)
 {
-	int		len;
-	char	*str;
+	int			len;
+	char		*str;
 	static char	hexa[] = "0123456789abcdef";
 
 	len = digits_in_hexa(n);
