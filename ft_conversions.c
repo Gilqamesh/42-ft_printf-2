@@ -6,13 +6,13 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:31:19 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 20:33:23 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 20:45:59 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "ft_conversions.h"
 #include "libft/libft.h"
+#include "ft_conversions.h"
 
 static void	positive_width(int *printed_bytes, int *flags, unsigned char c)
 {
@@ -41,123 +41,6 @@ int	print_conversion_c(unsigned char c, int *flags)
 	{
 		printed_bytes = 1;
 		write(1, &c, 1);
-	}
-	return (printed_bytes);
-}
-
-int	print_conversion_int(int n, int *flags)
-{
-	char	*converted_str;
-	int		conv_str_len;
-	int		precision;
-	int		printed_bytes;
-	int		is_negative;
-
-	if (flags[3] == -3)	// no precision
-		precision = -1;
-	else if (flags[3] == -1) 	// read from *
-		precision = flags[4];
-	else						// has precision
-		precision = flags[3];
-	is_negative = 0;
-	if (n < 0)
-		is_negative = 1;
-	converted_str = ft_itoa(n);
-	if (is_negative)
-		shift_str(&converted_str);
-	if (flags[3] == -2 && !n)	// if 0 precision and n is 0
-		shift_str(&converted_str);
-	conv_str_len = ft_strlen(converted_str);
-
-	// printf("In print_conversion_int, n: %d conv_str: %s\n", n, converted_str);
-	// printf("Converted string len: %d\n", conv_str_len);
-
-	if (precision > conv_str_len) // pad precision - conv_str_len 0s
-	{
-		if (flags[2] > precision) // space padded by flags[2] - precision
-		{
-			printed_bytes = flags[2];
-			if (flags[0]) // left justified
-			{
-				if (is_negative)
-					ft_putchar_fd('-', 1);
-				while (precision - conv_str_len++)
-					ft_putchar_fd('0', 1);
-				ft_putstr_fd(converted_str, 1);
-				while (flags[2]-- - precision - is_negative)
-					ft_putchar_fd(' ', 1);
-			}
-			else // right justified
-			{
-				while (flags[2]-- - precision - is_negative)
-					ft_putchar_fd(' ', 1);
-				if (is_negative)
-					ft_putchar_fd('-', 1);
-				while (precision-- - conv_str_len)
-					ft_putchar_fd('0', 1);
-				ft_putstr_fd(converted_str, 1);
-			}
-		}
-		else // not space padded, left justified by default
-		{
-			printed_bytes = precision + is_negative;
-			if (is_negative)
-				ft_putchar_fd('-', 1);
-			while (precision-- - conv_str_len)
-				ft_putchar_fd('0', 1);
-			ft_putstr_fd(converted_str, 1);
-		}
-	}
-	else // precision less than or equal to str_len
-	{
-		if (flags[2] > conv_str_len) // padded
-		{
-			printed_bytes = flags[2];
-			if (flags[0]) // left justified
-			{
-				if (flags[1] && precision == -1) // 0 padded instead of space
-				{
-					if (is_negative)
-						ft_putchar_fd('-', 1);
-					while (flags[2]-- - conv_str_len - is_negative)
-						ft_putchar_fd('0', 1);
-					ft_putstr_fd(converted_str, 1);
-				}
-				else
-				{
-					if (is_negative)
-						ft_putchar_fd('-', 1);
-					ft_putstr_fd(converted_str, 1);
-					while (flags[2]-- - conv_str_len - is_negative)
-						ft_putchar_fd(' ', 1);
-				}
-			}
-			else // right justified
-			{
-				if (flags[1] && precision == -1)
-				{
-					if (is_negative)
-						ft_putchar_fd('-', 1);
-					while (flags[2]-- - conv_str_len - is_negative)
-						ft_putchar_fd('0', 1);
-				}
-				else
-				{
-					while (flags[2]-- - conv_str_len - is_negative)
-						ft_putchar_fd(' ', 1);
-					if (is_negative)
-						ft_putchar_fd('-', 1);
-				}
-				ft_putstr_fd(converted_str, 1);
-			}
-		}
-		else // no padding
-		{
-			printed_bytes = conv_str_len + is_negative;
-			if (is_negative)
-				ft_putchar_fd('-', 1);
-			ft_putstr_fd(converted_str, 1);
-		}
 	}
 	return (printed_bytes);
 }
