@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 14:31:19 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 15:01:31 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 19:30:28 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,128 +38,6 @@ int	print_conversion_c(unsigned char c, int *flags)
 	{
 		printed_bytes = 1;
 		write(1, &c, 1);
-	}
-	return (printed_bytes);
-}
-
-int	print_conversion_s(char *str, int *flags)
-{
-	int	str_len;
-	int printed_bytes;
-	int	precision;
-	int	i;
-	int is_null;
-
-	is_null = 0;
-	if (!str)
-	{
-		is_null = 1;
-		str = "(null)";
-	}
-	if (flags[3] == -2)			// 0 precision
-		precision = 0;
-	else if (flags[3] == -3) 	// no precision
-		precision = -1;
-	else if (flags[3] == -1) 	// read from *
-		precision = flags[4];
-	else						// has precision
-		precision = flags[3];
-	printed_bytes = 0;
-	str_len = ft_strlen(str);
-	if (precision > str_len && flags[3] != -1)
-		precision = str_len;
-	// printf("precision: %d\n", precision);
-	if (precision == -1) // no truncation
-	{
-		if (flags[2] > str_len) // padding
-		{
-			printed_bytes = flags[2];
-			if (flags[0]) // left justified
-			{
-				ft_putstr_fd(str, 1);
-				while (flags[2]-- - str_len)
-					ft_putchar_fd(' ', 1);
-			}
-			else // right justified
-			{
-				while (flags[2]-- - str_len)
-					ft_putchar_fd(' ', 1);
-				ft_putstr_fd(str, 1);
-			}
-		}
-		else // no padding
-		{
-			printed_bytes = str_len;	
-			ft_putstr_fd(str, 1);
-		}
-	}
-	else if (flags[2] > precision) // need to pad
-	{
-		if (precision < str_len) // truncation
-		{
-			printed_bytes = flags[2];
-			if (flags[0]) // left justified
-			{
-				i = -1;
-				while (++i < precision)
-					write(1, str++, 1);
-				while (flags[2]-- - precision)
-					ft_putchar_fd(' ', 1);
-			}
-			else // right justified
-			{
-				while (flags[2]-- - precision)
-					ft_putchar_fd(' ', 1);
-				while (precision--)
-					write(1, str++, 1);
-			}
-		}
-		else // no truncation
-		{
-			printed_bytes = flags[2];
-			if (flags[0]) // left justified
-			{
-				ft_putstr_fd(str, 1);
-				while (flags[2]-- - str_len)
-					ft_putchar_fd(' ', 1);
-			}
-			else // right justified
-			{
-				while (flags[2]-- - str_len)
-					ft_putchar_fd(' ', 1);
-				ft_putstr_fd(str, 1);
-			}
-		}
-	}
-	else if (flags[2] > str_len) // need to pad with spaces
-	{
-		printed_bytes = flags[2];
-		if (flags[0]) // left justified
-		{
-			ft_putstr_fd(str, 1);
-			while (flags[2]-- - str_len)
-				ft_putchar_fd(' ', 1);
-		}
-		else
-		{
-			while (flags[2]-- - str_len)
-				ft_putchar_fd(' ', 1);
-			ft_putstr_fd(str, 1);
-		}
-	}
-	else 
-	{
-		if (precision < str_len) // truncation
-		{
-			printed_bytes = precision;
-			while (precision--)
-				write(1, str++, 1);
-		}
-		else
-		{
-			printed_bytes = str_len;
-			ft_putstr_fd(str, 1);
-		}
 	}
 	return (printed_bytes);
 }
