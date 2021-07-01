@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 16:11:01 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 16:25:14 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 16:26:02 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int *conv_spec_index, char *c)
 	{
 		while (ft_isdigit(*c))
 		{
-			flags[3] = flags[3] * 10 + c - '0';
+			flags[3] = flags[3] * 10 + *c - '0';
 			*c = conv_spec[++(*conv_spec_index)];
 		}
 		if (flags[3] == 0)
