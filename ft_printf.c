@@ -6,15 +6,16 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 14:20:43 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 15:49:04 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 16:12:10 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
+#include "ft_conversions.h"
 
-int	ft_printf(const char *format, ...) // looks good
+int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int		format_index;
