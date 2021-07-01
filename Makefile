@@ -6,49 +6,48 @@
 #    By: edavid <edavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/25 20:47:25 by edavid            #+#    #+#              #
-#    Updated: 2021/06/30 19:42:38 by edavid           ###   ########.fr        #
+#    Updated: 2021/07/01 15:36:55 by edavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-objects = ft_printf.o
 NAME = libftprintf.a
-libftPath = ./libft/libft.h
+libftHeader = ./libft/libft.h
+sources = ft_printf.c ft_conversions.c ft_conversions2.c \
+ft_conversions_utils.c ft_conversions_utils2.c
 
-$(NAME) : $(objects)
+$(NAME) : $(sources:.c=.o)
 	cd libft && $(MAKE) all
-	cp $(libftPath:.h=.a) .
+	cp $(libftHeader:.h=.a) .
 	mv libft.a $(NAME)
 	ar -rs $(NAME) $^
-
-ft_printf.o : $(libftPath) ft_printf.h
-
-driver.o : ft_printf.h driver.c
-	gcc -c -g driver.c
-ft_printf.o : ft_printf.h ft_printf.c
-	gcc -c -g ft_printf.c
-
-
-.PHONY: all clean fclean re bonus debugger
+ft_printf.o : ft_printf.c $(libftHeader) ft_printf.h ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_printf.c
+ft_conversions.o : ft_conversions.c $(libftHeader) ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_conversions.c
+ft_conversions2.o : ft_conversions2.c $(libftHeader) ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_conversions2.c
+ft_conversions_utils.o : ft_conversions_utils.c $(libftHeader) ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_conversions_utils.c
+ft_conversions_utils2.o : ft_conversions_utils2.c $(libftHeader) ft_conversions.h
+	$(CC) $(CFLAGS) -c ft_conversions_utils2.c
+driver.o : driver.c ft_printf.h
+	$(CC) $(CFLAGS) -c driver.c
+.PHONY: all clean fclean re bonus test
 all : $(NAME)
-re :
-	make clean
-	make all
-bonus :
-test : $(objects) driver.o
-	cd libft && $(MAKE) all
-	cp $(libftPath:.h=.a) .
-	mv libft.a $(NAME)
-	ar -rs $(NAME) $(objects) driver.o
-	$(CC) -o test.out $^ -Llibft -lft
 clean :
 	rm -f *.o libft/*.o
 fclean : clean
 	rm -f $(NAME)
-debugger : $(objects) driver.o
-	cd libft && $(MAKE) debugger
-	cp $(libftPath:.h=.a) .
+	cd libft && rm -f libft.a
+re :
+	make clean
+	make all
+bonus : all
+test : $(sources:.c=.o) driver.o
+	cd libft && $(MAKE) all
+	cp $(libftHeader:.h=.a) .
 	mv libft.a $(NAME)
-	ar -rs $(NAME) $(objects) driver.o
-	$(CC) -g -o test.out $^ -Llibft -lft
+	ar -rs $(NAME) $(sources:.c=.o) driver.o
+	$(CC) -o test.out $^ -Llibft -lft

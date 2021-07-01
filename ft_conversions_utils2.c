@@ -1,19 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_conversions_utils2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 14:18:21 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 14:34:18 by edavid           ###   ########.fr       */
+/*   Created: 2021/07/01 14:43:21 by edavid            #+#    #+#             */
+/*   Updated: 2021/07/01 14:44:48 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_conversions.h"
+#include <stdlib.h>
 
-# include <stdarg.h>
-int	ft_printf(const char *, ...);
+int		ft_uintlen(unsigned int n)
+{
+	int	len;
 
-#endif
+	if (!n)
+		return (1);
+	len = 0;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_initstr(char **str, int len, int is_zero)
+{
+	*str = (char *)malloc(len + 1);
+	if (!*str)
+		return ((char *)0);
+	*(*str + len) = '\0';
+	if (is_zero)
+		**str = '0';
+	return (*str);
+}
