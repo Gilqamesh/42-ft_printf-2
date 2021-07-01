@@ -6,14 +6,14 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:52:21 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/01 19:09:01 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/01 19:19:08 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_print_conversion_hexa_utilities.h"
 
-int		handle_flag_g_precision(int *flags, int precision,
+int	handle_flag_g_precision(int *flags, int precision,
 int conv_str_len, char *converted_str)
 {
 	int	printed_bytes;
