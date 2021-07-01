@@ -1,0 +1,8 @@
+libftprintf.a
+driver.c
+test.out
+*.o
+.DS_Store
+libft/*.o
+libft/libft.h.gch
+libft/libft.a
