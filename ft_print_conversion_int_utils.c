@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 20:47:56 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/02 12:53:02 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/02 14:35:35 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char *converted_str)
 	ft_putstr_fd(converted_str, 1);
 }
 
-int	handle_prec_g_str(int *flags, int precision, int is_n,
+int	handle_prec_g_str_i(int *flags, int precision, int is_n,
 char *converted_str)
 {
 	int	conv_str_len;
@@ -93,7 +93,7 @@ char *conv_str)
 	return (printed_bytes);
 }
 
-int	handle_flag_g_str(int *flags, int precision, int is_n, char *conv_str)
+int	handle_flag_g_str_i(int *flags, int precision, int is_n, char *conv_str)
 {
 	int	printed_bytes;
 	int	conv_str_len;

@@ -6,7 +6,7 @@
 /*   By: edavid <edavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 20:45:29 by edavid            #+#    #+#             */
-/*   Updated: 2021/07/02 12:52:41 by edavid           ###   ########.fr       */
+/*   Updated: 2021/07/02 14:38:31 by edavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	print_conversion_int(int n, int *flags)
 		shift_str(&conv_str);
 	conv_str_len = ft_strlen(conv_str);
 	if (precision > conv_str_len)
-		return (handle_prec_g_str(flags, precision, is_n, conv_str));
+		return (handle_prec_g_str_i(flags, precision, is_n, conv_str));
 	if (flags[2] > conv_str_len)
-		return (handle_flag_g_str(flags, precision, is_n, conv_str));
+		return (handle_flag_g_str_i(flags, precision, is_n, conv_str));
 	printed_bytes = conv_str_len + is_n;
 	if (is_n)
 		ft_putchar_fd('-', 1);
